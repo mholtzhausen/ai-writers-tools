@@ -1,24 +1,37 @@
 {
-	"name": "obsidian-sample-plugin",
+	"name": "obsidian-nem-ai-writing-tools",
 	"version": "1.0.0",
-	"description": "This is an example plugin for Obsidian. This plugin counts the lines of the active file and prints it in the status bar.",
+	"description": "This is the beginnings of an ai assistant inside of Obsidian.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
-		"version": "node version-bump.mjs && git add manifest.json versions.json"
+		"version": "node version-bump.mjs && git add manifest.json versions.json",
+		"build-css:watch": "sass -w --no-source-map components/styles:components/styles .",
+		"build-css": "sass --no-source-map components/styles:components/styles ."
 	},
 	"keywords": [],
 	"author": "",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^16.11.6",
+		"@types/react": "^18.3.12",
+		"@types/react-dom": "^18.3.1",
 		"@typescript-eslint/eslint-plugin": "5.29.0",
 		"@typescript-eslint/parser": "5.29.0",
 		"builtin-modules": "3.3.0",
 		"esbuild": "0.17.3",
+		"esbuild-plugin-css-modules": "^0.3.0",
 		"obsidian": "latest",
+		"sass": "^1.81.0",
 		"tslib": "2.4.0",
 		"typescript": "4.7.4"
+	},
+	"dependencies": {
+		"openai": "^4.72.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"zod": "^3.23.8",
+		"zod-to-json-schema": "^3.23.5"
 	}
 }

@@ -1,0 +1,54 @@
+.ai-writer .ai-writer__button-bar {
+  padding: 5px;
+  height: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+.ai-writer .ai-writer__button-bar .left-item,
+.ai-writer .ai-writer__button-bar .right-item {
+  height: 100%;
+  line-height: 0;
+}
+.ai-writer .ai-writer__button-bar .left-item .button,
+.ai-writer .ai-writer__button-bar .right-item .button {
+  padding: 0px;
+  --text-color: var(--text-normal);
+  -webkit-app-region: no-drag;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  font-size: var(--font-ui-small);
+  border-radius: var(--button-radius);
+  border: 0;
+  height: 100%;
+  font-weight: var(--input-font-weight);
+  cursor: var(--cursor);
+  font-family: inherit;
+  outline: none;
+  user-select: none;
+  white-space: nowrap;
+}
+.ai-writer .ai-writer__button-bar .left-item .button .clickable-icon,
+.ai-writer .ai-writer__button-bar .right-item .button .clickable-icon {
+  padding: 2px;
+  --text-color: var(--text-normal);
+  -webkit-app-region: no-drag;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  font-size: var(--font-ui-small);
+  border-radius: var(--button-radius);
+  border: 0;
+  width: fit-content;
+  height: 100%;
+  font-weight: var(--input-font-weight);
+  cursor: var(--cursor);
+  font-family: inherit;
+  outline: none;
+  user-select: none;
+  white-space: nowrap;
+}

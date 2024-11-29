@@ -1,0 +1,58 @@
+.ai-writer {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+
+	.settings-component {
+		padding: 10px;
+	}
+
+	.ai-writer-chat-display {
+		flex-grow: 1;
+		overflow-y: auto;
+	}
+
+	.ai-writer-chat-input {
+		border-top: 1px solid var(--divider-color);
+		padding-bottom: 30px;
+		margin-bottom: 0;
+		box-shadow: 0px 1px 7px black;
+		textarea {
+			width: -webkit-fill-available;
+			resize: none;
+			margin: 0px 10px 10px 10px;
+		}
+		button.sendButton {
+			position: absolute;
+			bottom: 35px;
+			right: 5px;
+			padding: 3px 8px;
+			width: auto;
+			height: auto;
+			> svg.svg-icon {
+				height: 16px;
+				width: 16px;
+				stroke-width: var(--icon-stroke);
+			}
+		}
+	}
+
+	.input-field {
+		flex-grow: 1;
+	}
+
+	.ai-writer-header {
+		position: sticky;
+		padding: 0 0 0 10px;
+		top: 0;
+		z-index: 11;
+		border-bottom: 1px solid var(--divider-color);
+		background: none;
+		padding: 10px;
+		box-shadow: 0px -1px 7px black;
+		> h2 {
+			margin: 0;
+			text-shadow: 2px 2px 5px black;
+		}
+	}
+}
