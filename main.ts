@@ -1,5 +1,5 @@
 import { Plugin } from "obsidian";
-import AIWriterView from "./AIWriterView";
+import AIWriterView from "./views/AIWriterView";
 import { AiwSettingTab } from "views/AiwSettingTab";
 import { AI_WRITER_TOOLS_VIEW_TYPE } from "./config";
 import { AiwPluginSettings, DEFAULT_SETTINGS } from "./lib/Settings";
@@ -38,7 +38,7 @@ export default class AiWriterPlugin extends Plugin {
 		this.addSettingTab(new AiwSettingTab(this.app, this));
 		this.registerView(
 			AI_WRITER_TOOLS_VIEW_TYPE,
-			(leaf) => new AIWriterView(leaf)
+			(leaf) => new AIWriterView(leaf, this)
 		);
 
 		// Add a ribbon icon to toggle the view

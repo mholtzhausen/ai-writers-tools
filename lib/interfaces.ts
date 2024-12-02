@@ -9,7 +9,7 @@ export interface MenuItem {
 export interface Message {
 	message: string;
 	role: MessageRoles;
-	model?: string;
+	model?: string | undefined;
 }
 
 export interface IconProps {

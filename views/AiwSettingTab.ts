@@ -1,5 +1,6 @@
 import AiwPlugin from "../main";
 import { App, PluginSettingTab, Setting } from "obsidian";
+import OpenAI from "openai";
 
 export class AiwSettingTab extends PluginSettingTab {
 	plugin: AiwPlugin;
@@ -7,6 +8,22 @@ export class AiwSettingTab extends PluginSettingTab {
 	constructor(app: App, plugin: AiwPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
+	}
+
+	async getModels(): Promise<string[]> {
+		if (!this.plugin.settings.openAIKey) {
+			return [];
+		}
+		let llm = new OpenAI({
+			apiKey: this.plugin.settings.openAIKey,
+			baseURL: this.plugin.settings.openAIBaseURL,
+			dangerouslyAllowBrowser: true,
+		});
+
+		let models = await llm.models.list();
+		console.dir({ models });
+		let modellist = models.data.map((model: any) => model.id) as string[];
+		return modellist.sort();
 	}
 
 	display(): void {
@@ -36,6 +53,23 @@ export class AiwSettingTab extends PluginSettingTab {
 					.setValue(this.plugin.settings.openAIKey)
 					.onChange(async (value) => {
 						this.plugin.settings.openAIKey = value;
+						await this.plugin.saveSettings();
+					});
+			});
+
+		new Setting(containerEl)
+			.setName("Default Model")
+			.setDesc("The default model to use for the AI")
+			.addDropdown(async (dropdown) => {
+				dropdown.selectEl.style.width = "100%";
+				const models = await this.getModels();
+				(models as string[]).forEach((model: string) => {
+					dropdown.addOption(model, model);
+				});
+				dropdown
+					.setValue(this.plugin.settings.model)
+					.onChange(async (value) => {
+						this.plugin.settings.model = value;
 						await this.plugin.saveSettings();
 					});
 			});

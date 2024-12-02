@@ -3,28 +3,10 @@ import React, { useState, useRef, useEffect } from "react";
 import "./styles/AIWriter.css";
 import { ButtonBar } from "./ButtonBar";
 import { ChatMessage } from "./ChatMessage";
-import { Agent } from "../lib/Agent.mjs";
-import OpenAI from "openai";
-import { useApp } from "../hooks";
+// import { Agent } from "../lib/Agent.mjs";
+import { useApp, usePlugin } from "../hooks";
 
 import { MenuItem, Message } from "../lib/interfaces";
-
-let llm = new OpenAI({
-	apiKey: "",
-	dangerouslyAllowBrowser: true,
-});
-
-let agent = new Agent(
-	{
-		name: "Personal Assistant",
-		description:
-			"A personal assistant that can help you with your daily tasks.",
-		model: "gpt-4o-mini",
-		system: "You are a helpful assistant. You area easy-going, engaging, funny and charming. You respond concisely, with wisdom and humor, and in a readable format. If there are references and links to online resources, please include them in a list.",
-		// tools: [tools.inetTool(statusEmitter)],
-	},
-	llm
-);
 
 export const AIWriter: React.FC<{
 	openSettings: () => void;
@@ -35,6 +17,12 @@ export const AIWriter: React.FC<{
 	const chatDisplayRef = useRef<HTMLDivElement>(null);
 	const sendButtonRef = useRef<HTMLButtonElement>(null);
 	const app = useApp();
+	const plugin = usePlugin();
+	if (!plugin || !plugin.agent || !plugin.llm)
+		throw new Error("Agent or LLM not found");
+	const agent = plugin.agent;
+
+	console.dir({ agent });
 
 	const menuItemsLeft: MenuItem[] = [];
 	const menuItemsRight = [
@@ -65,13 +53,14 @@ export const AIWriter: React.FC<{
 			if (inputRef.current) {
 				inputRef.current.readOnly = true;
 			}
+			agent.model = plugin.settings.model;
 			await agent
 				.ask(inputText)
 				.then((response) => {
 					const responseMessage: Message = {
 						message: response,
 						role: "assistant",
-						model: agent.model,
+						model: agent.model || undefined,
 					};
 					currentMessages.push(responseMessage);
 					console.dir(currentMessages);
