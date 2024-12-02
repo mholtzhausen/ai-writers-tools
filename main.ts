@@ -4,7 +4,7 @@ import { AiwSettingTab } from "views/AiwSettingTab";
 import { AI_WRITER_TOOLS_VIEW_TYPE } from "./config";
 import { AiwPluginSettings, DEFAULT_SETTINGS } from "./lib/Settings";
 import { OpenAI } from "openai";
-import { Agent } from "lib/Agent.mjs";
+import { Agent } from "lib/Agent.js";
 
 export default class AiWriterPlugin extends Plugin {
 	statusBarElement: HTMLSpanElement;
