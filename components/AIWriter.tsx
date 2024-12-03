@@ -25,7 +25,7 @@ export const AIWriter: React.FC<{
 	console.dir({ agent });
 
 	const menuItemsLeft: MenuItem[] = [];
-	const menuItemsRight = [
+	const menuItemsRight: MenuItem[] = [
 		{
 			label: "Settings",
 			icon: "settings",
