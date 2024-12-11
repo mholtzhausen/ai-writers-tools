@@ -28,7 +28,7 @@
 		"typescript": "4.7.4"
 	},
 	"dependencies": {
-		"openai": "^4.72.0",
+		"openai": "^4.76.1",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"zod": "^3.23.8",

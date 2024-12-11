@@ -1,0 +1,60 @@
+.systemSelect {
+	display: flex;
+	flex-direction: column;
+	label[data-id="agent_preset_label"] {
+		width: 100%;
+		// text-align: right;
+	}
+
+	select[data-id="agent_preset"] {
+		margin-left: 10px;
+		max-width: 300px;
+		width: 100%;
+	}
+	div[data-id="query_field"] {
+		display: flex;
+		flex-direction: column;
+		border-top: 1px solid var(--divider-color);
+		margin-top: 10px;
+		> label {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		> [data-id="query_field_input"] {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			> input {
+				margin-left: 10px;
+				max-width: 300px;
+				width: 100%;
+			}
+		}
+	}
+	div[data-id="button_bar"] {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		margin-top: 10px;
+		> button {
+			margin-left: 10px;
+		}
+	}
+	div[data-id="response_field"] {
+		display: flex;
+		flex-direction: column;
+		border-top: 1px solid var(--divider-color);
+		margin-top: 10px;
+		> label {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		> [data-id="response_content"] {
+			white-space: pre-wrap;
+			margin-top: 10px;
+			min-height: 200px;
+			height: 200px;
+			overflow-y: auto;
+		}
+	}
+}

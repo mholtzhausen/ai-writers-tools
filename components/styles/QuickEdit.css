@@ -1,0 +1,14 @@
+.quickEdit {
+  display: flex;
+  flex-direction: column;
+}
+.quickEdit [data-id=query_field_input] {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.quickEdit [data-id=query_field_input] > input {
+  margin-left: 10px;
+  max-width: 300px;
+  width: 100%;
+}

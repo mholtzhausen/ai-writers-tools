@@ -173,15 +173,16 @@ export class Agent extends EventEmitter {
 		};
 		let { model, system, messages } = config;
 
-		if (schema && schema instanceof z.Schema)
+		if (schema && schema instanceof z.Schema) {
 			return await this.structuredAsk(prompt, { schema, config });
+		}
 
 		let iMessages = [
 			...(messages || []),
 			{ role: "user", content: prompt },
 		];
 
-		let response = await this.llm!.chat.completions.create({
+		let stream = await this.llm!.chat.completions.create({
 			model: model!,
 			messages: [
 				{
@@ -190,14 +191,24 @@ export class Agent extends EventEmitter {
 				},
 				...iMessages,
 			],
+			stream: true,
 		});
+
+		let response = "";
+
+		for await (const chunk of stream) {
+			let chunkContent = chunk.choices[0]?.delta?.content || "";
+			response += chunkContent;
+			this.emit("chunk", chunk);
+			this.emit("udatedResponse", response);
+		}
 
 		this._messages = [
 			...iMessages,
-			{ role: "assistant", content: response.choices[0].message.content },
+			{ role: "assistant", content: response },
 		];
 
-		return response.choices[0].message.content;
+		return response;
 	}
 
 	static splitObj(

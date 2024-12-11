@@ -87,5 +87,21 @@ export class AiwSettingTab extends PluginSettingTab {
 						await this.plugin.saveSettings();
 					});
 			});
+
+		new Setting(containerEl)
+			.setName("Write With AI: System Prompt")
+			.setDesc(
+				"Additional system prompt to add to the Write With AI agent."
+			)
+			.addTextArea((text) => {
+				text.inputEl.rows = 5;
+				text.inputEl.style.width = "100%";
+				text.setPlaceholder("You are a helpful AI assistant")
+					.setValue(this.plugin.settings.writeWithAiSystem || "")
+					.onChange(async (value) => {
+						this.plugin.settings.writeWithAiSystem = value;
+						await this.plugin.saveSettings();
+					});
+			});
 	}
 }

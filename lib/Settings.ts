@@ -29,11 +29,14 @@ export interface AiwPluginSettings {
 	model: string;
 	// systemPrompt: AiWPrompt;
 	systemPrompt: string;
+	writeWithAiSystem?: string;
 	// conversations: AiwConversation[];
 	messages: AiwMessage[];
 }
 
 export const DEFAULT_SETTINGS: Partial<AiwPluginSettings> = {
 	systemPrompt: "You are a helpful AI assistant",
+	writeWithAiSystem:
+		"Only respond with the requested text. Do not add any explainers, summaries, or additional information",
 	messages: [],
 };
